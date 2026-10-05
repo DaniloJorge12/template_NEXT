@@ -20,7 +20,7 @@ export default function Header() {
         <header className={styles.header}>
             <div className={styles.left}>
                 <Link href="/" className={styles.atom}>
-                    <Atom color="purple" size={50} />
+                    <Atom size={50} />
                 </Link>
                 <div>
                     <h2>NextJS16 App Router</h2>

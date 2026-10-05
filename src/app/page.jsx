@@ -1,12 +1,14 @@
-import Card from '@components/Card'
-import { crud, examples } from '@/data/crud';
-import styles from "./page.module.css";
+import Card from '@/components/Card';
+import { examples, crud } from '@/data/crud';
+import styles from './page.module.css';
 
-export default function Page() {
+export default async function Page() {
+   // await new Promise((resolve) => setTimeout(resolve, 5000));
+
     return (
-    <>
-        <main className={styles.main}>
-                {examples.map(({ id, method, verb, description, color, Icon }) => (
+        <>
+            <main className={styles.main}>
+                {examples.map(({id, method, verb, description, color, Icon}) => (
                     <Card
                         key={id}
                         id={id}
@@ -17,7 +19,7 @@ export default function Page() {
                         Icon={Icon}
                     />
                 ))}
-                {crud.map(({ id, method, verb, description, color, Icon }) => (
+                {crud.map(({id, method, verb, description, color, Icon}) => (
                     <Card
                         key={id}
                         id={id}
@@ -27,12 +29,12 @@ export default function Page() {
                         color={color}
                         Icon={Icon}
                     />
-            ))}
-        </main>
-        <footer className={styles.footer}>
-            <p>Pedro &copy {new Date().getFullYear()}</p>
-            <p>Next.js - Axiso - Ant Design - Lucite</p>
-        </footer>
-    </>
-  )
+                ))}
+            </main>
+            <footer className={styles.footer}>
+                <p>Codeverse &copy {new Date().getFullYear()}</p>
+                <p>Next.js - Axios - Ant Design - Lucite</p>
+            </footer>
+        </>
+    )
 }

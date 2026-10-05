@@ -5,7 +5,7 @@ export default function NotFound() {
         <Result
             status='404'
             title='404'
-            subTitle='A página não existe.'
-        />
-    );
+            subTitle='A Página não existe.'
+            />
+    )
 }

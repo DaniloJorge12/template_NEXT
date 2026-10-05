@@ -4,18 +4,19 @@ import Header from '@components/Header'
 import { Toaster } from 'react-hot-toast';
 
 export const metadata = {
-    title: 'FrontEnd - Codeverse',
-    description: 'Projeto de CRUD com Next.js 16, React, Ant Design, Toast e Axios.',
+  title: 'Next.js CRUD',
+  description: 'Projeto de CRUD com Next.js 16, React, Ant Design, Toast e Axios',
 };
 
 export default function RootLayout({ children }) {
-    return (
-        <html lang="pt-BR">
-            <body>
-                <Header />
-                <AntdRegistry>{children}</AntdRegistry>
-                <Toaster />
-            </body>
-        </html>
-    );
+  return (
+    <html lang="pt-BR">
+      <body>
+        <Header />
+        <AntdRegistry>{children}</AntdRegistry>
+        <Toaster />
+        <Toaster />
+      </body>
+    </html>
+  );
 }

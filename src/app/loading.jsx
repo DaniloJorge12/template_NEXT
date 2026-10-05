@@ -6,5 +6,5 @@ export default function Loading() {
             <Spin size='large' />
             <p>Carregando a página ...</p>
         </main>
-    );
+    )
 }

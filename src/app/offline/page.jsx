@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
 
 export default function OfflinePage() {
-    const [series, setSeries] = useState([]);
+    const  [series, setSeries] = useState([]);
 
     useEffect(() => {
         const stored = sessionStorage.getItem('series');
@@ -11,8 +11,8 @@ export default function OfflinePage() {
     }, []);
     return (
         <main>
-            <h2>GET - offline</h2>
-            <p>SessionStorage e nunca chama(fetch/axios) a API.</p>
+            <h2>GET - Offline</h2>
+            <p>SesionStorage e nunca chama (fetch/axios) a API.</p>
             <ul>
                 {series.map((item) => (
                     <li key={item.id}>{item.title}</li>
