@@ -1,14 +1,15 @@
 'use client';
 
 import FormModal from '@components/FormModal';
-import { Button, Card, Form, Skeleton } from 'antd';
+import { Button, Card, Modal, Skeleton } from 'antd';
 import axios from 'axios';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 export default function ReadByIdPage() {
     const { id } = useParams();
+    const router = useRouter();
     const [serie, setSerie] = useState(null);
     const [loading, setLoading] = useState(true);
     const [editOpen, setEditOpen] = useState(false);
@@ -22,7 +23,7 @@ export default function ReadByIdPage() {
                 const response = await axios.get(`/api/series/${id}`);
                 setSerie(response.data);
             } catch (error) {
-                toast.error('Série não encontrada.', { id: 'read-id' });
+                toast.error(error.response?.data?.error || 'Não foi possível buscar a série.', { id: 'read-id' });
                 console.error(error);
             } finally {
                 setLoading(false);
@@ -41,12 +42,28 @@ export default function ReadByIdPage() {
             setEditOpen(false);
             toast.success('Série atualizada.', { id: 'read-id' });
         } catch (error) {
-            toast.error('Erro ao atualizar série.', { id: 'read-id' });
+            toast.error(error.response?.data?.error || 'Não foi possível atualizar a série.', { id: 'read-id' });
             console.error(error);
         } finally {
             setSaving(false);
         }
     }
+
+    async function handleDelete() {
+        setDeleting(true);
+
+        try {
+            await axios.delete(`/api/series/${id}`);
+            toast.success('Série excluída.', { id: 'read-id' });
+            router.push('/read');
+        } catch (error) {
+            toast.error(error.response?.data?.error || 'Não foi possível excluir a série.', { id: 'read-id' });
+            console.error(error);
+        } finally {
+            setDeleting(false);
+        }
+    }
+    
 
     return (
         <main>
@@ -84,6 +101,18 @@ export default function ReadByIdPage() {
                             onSubmit={handleUpdate}
                             onCancel={() => setEditOpen(false)}
                         />
+                        <Modal
+                            open={deleteOpen}
+                            title="Excluir série"
+                            okText="Excluir"
+                            cancelText="Cancelar"
+                            okButtonProps={{ danger: true }}
+                            confirmLoading={deleting}
+                            onOk={handleDelete}
+                            onCancel={() => setDeleteOpen(false)}
+                        >
+                            <p>Tem certeza de que deseja excluir esta série?</p>
+                        </Modal>
                     </>
                 )
             )}

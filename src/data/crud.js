@@ -58,7 +58,7 @@ export const crud = [
         method: 'Read',
         verb: 'Get',
         description: 'Retorna os detalhes de uma série específica.',
-        color: 'blue',
+        color: 'yellow',
         Icon: List,
     },
     {
@@ -66,7 +66,7 @@ export const crud = [
         method: 'Update',
         verb: 'Put',
         description: 'Atualiza os dados de uma série existente.',
-        color: 'yellow',
+        color: 'blue',
         Icon: SquarePen,
     },
     {

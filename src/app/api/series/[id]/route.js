@@ -37,3 +37,19 @@ export async function PUT(request, { params }) {
         return NextResponse.json(data, { status });
     }
 }
+
+export async function DELETE(_request, { params }) {
+    const { id } = await params;
+
+    try {
+        const response = await axios.delete(`${process.env.API_URL_SERIES}/${id}`, {
+            headers: { 'x-api-key': process.env.API_KEY },
+        });
+        return NextResponse.json(response.data);
+    } catch (error) {
+        const status = error.response?.status || 500;
+        const data = error.response?.data || { error: 'Erro ao excluir a série.' };
+
+        return NextResponse.json(data, { status });
+    }
+}
